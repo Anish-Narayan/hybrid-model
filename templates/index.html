@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NB-RF Prediction</title>
+</head>
+<body>
+    <h2>Enter Input Data</h2>
+    <form action="/predict" method="post">
+        {% for feature in feature_names %}
+            <label>{{ feature }}:</label>
+            <input type="text" name="{{ feature }}"><br><br>
+        {% endfor %}
+        <input type="submit" value="Predict">
+    </form>
+</body>
+</html>

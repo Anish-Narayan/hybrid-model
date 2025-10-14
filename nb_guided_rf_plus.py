@@ -9,6 +9,7 @@ from imblearn.over_sampling import SMOTE
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import pearsonr
+import pickle  # Import pickle module
 
 # ------------------ Load consistent split ------------------
 train_df = pd.read_csv("train.csv")
@@ -93,3 +94,18 @@ plt.xlabel("Importance")
 plt.tight_layout()
 plt.savefig("rf_feature_importances.png")
 plt.show()
+
+# ------------------ Save the model, scaler, and encoder ------------------
+
+# Create a dictionary to save the objects
+model_objects = {
+    'random_forest_model': rf,
+    'label_encoder': le,
+    'scaler': StandardScaler().fit(X_train[selected_features]),  # Recreate the scaler
+}
+
+# Save the objects to a pickle file
+with open("model_objects.pkl", "wb") as f:
+    pickle.dump(model_objects, f)
+
+print("🔐 Model, scaler, and encoder saved to model_objects.pkl")
